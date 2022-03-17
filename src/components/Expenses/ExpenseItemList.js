@@ -4,6 +4,8 @@ import card from "../UI/Card";
 import {useState} from "react";
 import ExpenseFilter from "../ExpenseFilter/ExpenseFilter";
 import Card from "../UI/Card";
+import ExpensesChart from "./ExpensesChart";
+import ExpensesList from "./ExpensesList"
 const ExpenseItemList = (props) => {
     const [filteredYear, setFilteredYear] = useState('2020');
     const [inlist, setInlist] = useState(props.itemList)
@@ -18,18 +20,12 @@ const ExpenseItemList = (props) => {
         console.log(inlist);
     }
 
-    let expensesContent = <p>No Expenses Found</p>;
-
-    if (inlist.length > 0) {
-        expensesContent = inlist.map((item) => (
-            <ExpenseItem key={item.id} title={item.title} amount={item.amount} date={item.date}/>
-        ))
-    }
 
     return (
         <Card className="expenses">
             <ExpenseFilter filteredYear={filteredYear} saveFilterYear={saveFilterYear}/>
-            {expensesContent}
+            <ExpensesChart expenses={inlist}/>
+            <ExpensesList inlist = {inlist}/>
         </Card>
     );
 }
